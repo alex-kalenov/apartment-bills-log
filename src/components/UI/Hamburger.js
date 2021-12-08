@@ -1,0 +1,36 @@
+import { Fragment, useState } from "react";
+import ReactDOM from "react-dom";
+import styles from "./Hamburger.module.css";
+import HamburgerButton from "./HamburgerButton";
+import Layout from "./Layout";
+
+const Hamburger = (props) => {
+  const [visible, setVisible] = useState(false);
+
+  const toggleHamburgerHandler = () => {
+    setVisible((state) => setVisible(!state));
+  };
+
+  const hamburgerClass = `${styles.menuToggle} ${
+    visible ? styles.visible : ""
+  }`;
+
+  return (
+    <Fragment>
+      {ReactDOM.createPortal(
+        <Layout isVisible={visible} onClick={toggleHamburgerHandler} />,
+        document.getElementById("layouts")
+      )}
+      <div className={hamburgerClass}>
+        <HamburgerButton
+          onToggle={toggleHamburgerHandler}
+          className={styles["hamburger-button"]}
+          isVisible={visible}
+        />
+        <nav>{props.children}</nav>
+      </div>
+    </Fragment>
+  );
+};
+
+export default Hamburger;

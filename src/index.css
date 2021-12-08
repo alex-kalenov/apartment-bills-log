@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+
+  /* make it look decent enough */
+  background: white;
+  color: black;
+  font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+.wrapper {
+  position: relative;
+  max-width: 250px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+h2 {
+  position: absolute;
+  display: block;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  white-space: nowrap;
+}
+
+form div {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+form div:last-child {
+  justify-content: center;
+}
+
+form button {
+  flex-basis: 80px;
+}
+
+.extra-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.extra-buttons button {
+  flex-basis: 60px;
+}
