@@ -21,12 +21,12 @@ const Hamburger = (props) => {
         <Layout isVisible={visible} onClick={toggleHamburgerHandler} />,
         document.getElementById("layouts")
       )}
+      <HamburgerButton
+        onToggle={toggleHamburgerHandler}
+        className={styles["hamburger-button"]}
+        isVisible={visible}
+      />
       <div className={hamburgerClass}>
-        <HamburgerButton
-          onToggle={toggleHamburgerHandler}
-          className={styles["hamburger-button"]}
-          isVisible={visible}
-        />
         <nav>{props.children}</nav>
       </div>
     </Fragment>
