@@ -28,6 +28,9 @@ const Hamburger = (props) => {
       />
       <div className={hamburgerClass}>
         <nav>{props.children}</nav>
+        <div className={styles["logout-wrapper"]}>
+          <button className={styles.logout}>Выйти</button>
+        </div>
       </div>
     </Fragment>
   );

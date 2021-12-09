@@ -19,6 +19,9 @@ const Navigation = () => {
         <li>
           <a href="#">Garbage</a>
         </li>
+        <li>
+          <a href="#">Heating</a>
+        </li>
       </ul>
     </Hamburger>
   );
