@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
+import { useHistory } from "react-router-dom";
 import Button from "./Button";
 import styles from "./Hamburger.module.css";
 import HamburgerButton from "./HamburgerButton";
@@ -7,9 +8,14 @@ import Layout from "./Layout";
 
 const Hamburger = (props) => {
   const [visible, setVisible] = useState(false);
+  const history = useHistory();
 
   const toggleHamburgerHandler = () => {
     setVisible((state) => setVisible(!state));
+  };
+
+  const logoutHandler = () => {
+    history.push("/");
   };
 
   const hamburgerClass = `${styles.menuToggle} ${
@@ -30,7 +36,9 @@ const Hamburger = (props) => {
       <div className={hamburgerClass}>
         <nav>{props.children}</nav>
         <div className={styles["logout-wrapper"]}>
-          <Button className={styles.logout}>Выйти</Button>
+          <Button className={styles.logout} onClick={logoutHandler}>
+            Выйти
+          </Button>
         </div>
       </div>
     </Fragment>

@@ -110,9 +110,14 @@ export default function App() {
         <Route>
           <Navigation />
           <Workflow>
-            <Route path="/details">
-              <DetailsPage />
-            </Route>
+            <Switch>
+              <Route path="/details" exact>
+                <DetailsPage />
+              </Route>
+              <Route>
+                <div>Hello</div>
+              </Route>
+            </Switch>
           </Workflow>
         </Route>
       </Switch>

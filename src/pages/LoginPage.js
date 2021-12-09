@@ -1,12 +1,20 @@
 import Card from "../components/UI/Card";
 import styles from "./LoginPage.module.css";
 import Button from "../components/UI/Button";
+import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
+  const history = useHistory();
+
+  const loginHandler = (event) => {
+    event.preventDefault();
+    history.push("/details");
+  };
+
   return (
     <div>
       <Card className={styles["form-wrapper"]}>
-        <form>
+        <form onSubmit={loginHandler}>
           <div className={styles["form-row"]}>
             <label htmlFor="email">Email</label>
             <input id="email" type="email" />

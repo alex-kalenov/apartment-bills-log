@@ -1,28 +1,19 @@
+import { Link } from "react-router-dom";
 import Hamburger from "../UI/Hamburger";
+import { bills } from "../../helpers/data";
 
 const Navigation = () => {
+  const menuItems = bills.map((item) => {
+    return (
+      <li>
+        <Link to={"/details?bill=" + item.id}>{item.label}</Link>
+      </li>
+    );
+  });
+
   return (
     <Hamburger>
-      <ul>
-        <li>
-          <a href="#">Gas</a>
-        </li>
-        <li>
-          <a href="#">Electricity</a>
-        </li>
-        <li>
-          <a href="#">Water</a>
-        </li>
-        <li>
-          <a href="#">Rent</a>
-        </li>
-        <li>
-          <a href="#">Garbage</a>
-        </li>
-        <li>
-          <a href="#">Heating</a>
-        </li>
-      </ul>
+      <ul>{menuItems}</ul>
     </Hamburger>
   );
 };
