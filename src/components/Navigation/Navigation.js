@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import Hamburger from "../UI/Hamburger";
-import { bills } from "../../helpers/data";
+import { categories } from "../../helpers/data";
 
 const Navigation = () => {
-  const menuItems = bills.map((item) => {
+  const menuItems = categories.map((item) => {
     return (
-      <li>
-        <Link to={"/details?bill=" + item.id}>{item.label}</Link>
+      <li key={item.id}>
+        <Link to={"/details?category=" + item.id}>{item.linkLabel}</Link>
       </li>
     );
   });

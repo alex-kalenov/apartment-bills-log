@@ -1,0 +1,15 @@
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+h2 {
+  display: inline-block;
+  margin: 0;
+}
+
+h2 span {
+  color: green;
+  font-weight: 700;
+}
