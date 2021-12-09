@@ -3,9 +3,11 @@ import { useState, useRef, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
+import DetailsPage from "./pages/DetailsPage";
 
 import Navigation from "./components/Navigation/Navigation";
 import Workflow from "./components/UI/Workflow";
+import { Redirect } from "react-router-dom";
 
 const API_KEY = "AIzaSyAygkuob-llQEBdiyuUxv29_CthHtt1P9A";
 const APP_PATH = "https://react-http-d6323-default-rtdb.firebaseio.com/";
@@ -98,14 +100,22 @@ export default function App() {
 
   return (
     <Fragment>
-      <Navigation />
-      <Workflow>
-        <Switch>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-        </Switch>
-      </Workflow>
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/login" />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route>
+          <Navigation />
+          <Workflow>
+            <Route path="/details">
+              <DetailsPage />
+            </Route>
+          </Workflow>
+        </Route>
+      </Switch>
     </Fragment>
   );
 }
