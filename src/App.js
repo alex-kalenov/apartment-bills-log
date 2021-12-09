@@ -1,5 +1,9 @@
 import "./index.css";
 import { useState, useRef, Fragment } from "react";
+import { Route, Switch } from "react-router-dom";
+
+import LoginPage from "./pages/LoginPage";
+
 import Navigation from "./components/Navigation/Navigation";
 import Workflow from "./components/UI/Workflow";
 
@@ -96,20 +100,11 @@ export default function App() {
     <Fragment>
       <Navigation />
       <Workflow>
-        <div
-          style={{
-            height: "1000px",
-            background:
-              "url(https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80)"
-          }}
-        >
-          <button
-            style={{ display: "block", margin: "0 auto" }}
-            onClick={() => alert("test")}
-          >
-            Test
-          </button>
-        </div>
+        <Switch>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+        </Switch>
       </Workflow>
     </Fragment>
   );
