@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
+import Button from "./Button";
 import styles from "./Hamburger.module.css";
 import HamburgerButton from "./HamburgerButton";
 import Layout from "./Layout";
@@ -29,7 +30,7 @@ const Hamburger = (props) => {
       <div className={hamburgerClass}>
         <nav>{props.children}</nav>
         <div className={styles["logout-wrapper"]}>
-          <button className={styles.logout}>Выйти</button>
+          <Button className={styles.logout}>Выйти</Button>
         </div>
       </div>
     </Fragment>
