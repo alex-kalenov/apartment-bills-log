@@ -1,5 +1,9 @@
 const LoginPage = () => {
-  return <div>test</div>;
+  return (
+    <div>
+      <button onClick={() => alert("test")}>test</button>
+    </div>
+  );
 };
 
 export default LoginPage;
