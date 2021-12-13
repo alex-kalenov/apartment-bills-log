@@ -1,7 +1,7 @@
 import styles from "./DetailsPage.module.css";
-import Card from "../components/UI/Card";
+import DetailsItem from "./DetailsItem";
 import { useLocation } from "react-router-dom";
-import { categories, dummyBills, months } from "../helpers/data";
+import { categories, dummyBills } from "../helpers/data";
 
 const DetailsPage = () => {
   const location = useLocation();
@@ -13,27 +13,12 @@ const DetailsPage = () => {
 
   if (dummyBills[existingCategory.id])
     billsData = dummyBills[existingCategory.id].map((item) => {
-      const digitalMonth = item.date.getMonth() - 1;
-      const verbalMonth = months[digitalMonth] + " " + item.date.getFullYear();
-
       return (
-        <div key={digitalMonth} className="col-xxl-3 col-xl-4 col-md-6 col-12">
-          <Card className={styles["bills-item"]}>
-            <span>{verbalMonth}</span>
-            <form>
-              <div>
-                <label htmlFor="value">Показатели</label>
-                <input type="number" id="value" />
-              </div>
-              <div>
-                <label htmlFor="paid">Сумма</label>
-                <input type="number" id="paid" />
-              </div>
-              <div>
-                <button type="submit">Изменить</button>
-              </div>
-            </form>
-          </Card>
+        <div
+          key={item.date.getMonth() - 1}
+          className="col-xxl-3 col-xl-4 col-md-6 col-12"
+        >
+          <DetailsItem date={item.date} paid={item.paid} value={item.value} />
         </div>
       );
     });
