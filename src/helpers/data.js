@@ -35,3 +35,6 @@ export const dummyBills = {
   ],
   water: [{ date: new Date(2021, 6, 1), paid: 180, value: 12 }]
 };
+
+export const API_KEY = "AIzaSyAygkuob-llQEBdiyuUxv29_CthHtt1P9A";
+export const APP_PATH = "https://react-http-d6323-default-rtdb.firebaseio.com/";
