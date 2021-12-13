@@ -1,0 +1,28 @@
+.toast {
+  position: fixed;
+  bottom: 0;
+  right: 3%;
+  color: white;
+  font-size: 18px;
+  padding: 20px;
+  border-radius: 7px;
+  transition: transform 0.3s;
+  transform: translateY(100%);
+}
+
+.toast p {
+  margin: 0;
+  max-width: 300px;
+}
+
+.succeed {
+  background-color: green;
+}
+
+.error {
+  background-color: red;
+}
+
+.show {
+  transform: translateY(-20%);
+}

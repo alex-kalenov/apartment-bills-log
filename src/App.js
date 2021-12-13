@@ -8,6 +8,7 @@ import DetailsPage from "./pages/DetailsPage";
 import Navigation from "./components/Navigation/Navigation";
 import Workflow from "./components/UI/Workflow";
 import { Redirect } from "react-router-dom";
+import Toast from "./components/UI/Toast";
 
 const API_KEY = "AIzaSyAygkuob-llQEBdiyuUxv29_CthHtt1P9A";
 const APP_PATH = "https://react-http-d6323-default-rtdb.firebaseio.com/";
@@ -121,6 +122,7 @@ export default function App() {
           </Workflow>
         </Route>
       </Switch>
+      <Toast message={"Всё отлично!"} type="succeed" show />
     </Fragment>
   );
 }
