@@ -1,7 +1,9 @@
 import styles from "./DetailsPage.module.css";
-import DetailsItem from "./DetailsItem";
+import DetailsItem from "../components/Details/DetailsItem";
 import { useLocation } from "react-router-dom";
 import { categories, dummyBills } from "../helpers/data";
+import DetailsAdd from "../components/Details/DetailsAdd";
+import Item from "../components/UI/Item";
 
 const DetailsPage = () => {
   const location = useLocation();
@@ -14,12 +16,9 @@ const DetailsPage = () => {
   if (dummyBills[existingCategory.id])
     billsData = dummyBills[existingCategory.id].map((item) => {
       return (
-        <div
-          key={item.date.getMonth() - 1}
-          className="col-xxl-3 col-xl-4 col-md-6 col-12"
-        >
+        <Item key={item.date.getMonth() - 1}>
           <DetailsItem date={item.date} paid={item.paid} value={item.value} />
-        </div>
+        </Item>
       );
     });
 
@@ -30,7 +29,12 @@ const DetailsPage = () => {
           Отчетные данные по <span>{existingCategory.detailLabel}</span>
         </h2>
       </div>
-      <div className="row">{billsData}</div>
+      <div className="row">
+        <Item>
+          <DetailsAdd />
+        </Item>
+        {billsData}
+      </div>
     </div>
   );
 };
