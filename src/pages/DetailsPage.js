@@ -9,6 +9,19 @@ const DetailsPage = () => {
   let existingCategory = categories.find((items) => items.id === category);
   if (!existingCategory) existingCategory = categories[0];
 
+  let billsData;
+
+  if (dummyBills[existingCategory.id])
+    billsData = dummyBills[existingCategory.id].map((item) => {
+      const trueMonth = item.date.getMonth() - 1;
+
+      return (
+        <div key={trueMonth} className="col-xxl-3 col-xl-4 col-md-6 col-12">
+          <Card>{months[trueMonth] + " " + item.date.getFullYear()}</Card>
+        </div>
+      );
+    });
+
   return (
     <div>
       <div className={styles["header-wrapper"]}>
@@ -16,17 +29,7 @@ const DetailsPage = () => {
           Отчетные данные по <span>{existingCategory.detailLabel}</span>
         </h2>
       </div>
-      <div className="row">
-        {dummyBills[existingCategory.id].map((item) => {
-          return (
-            <div className="col-4">
-              <Card>
-                {months[item.date.getMonth()] + " " + item.date.getFullYear()}
-              </Card>
-            </div>
-          );
-        })}
-      </div>
+      <div className="row">{billsData}</div>
     </div>
   );
 };
