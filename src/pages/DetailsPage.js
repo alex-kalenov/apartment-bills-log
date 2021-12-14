@@ -13,7 +13,7 @@ import { getData } from "../helpers/functions";
 
 const DetailsPage = () => {
   const authCtx = useContext(AuthContext);
-  const { sendRequest, status, data, error } = useHttp(getData, true);
+  const { sendRequest, status, data, error, dispatch } = useHttp(getData, true);
 
   const location = useLocation();
   const category = new URLSearchParams(location.search).get("category");
@@ -21,12 +21,13 @@ const DetailsPage = () => {
   if (!existingCategory) existingCategory = categories[0];
 
   useEffect(() => {
-    sendRequest({
-      token: authCtx.token,
-      userId: authCtx.userId,
-      category: existingCategory.id
-    });
-  }, [sendRequest, authCtx, existingCategory]);
+    if (status === "pending")
+      sendRequest({
+        token: authCtx.token,
+        userId: authCtx.userId,
+        category: existingCategory.id
+      });
+  }, [sendRequest, authCtx, existingCategory, status]);
 
   if (status === "pending") {
     return (
@@ -52,6 +53,10 @@ const DetailsPage = () => {
       );
     });
 
+  const addDataHandler = (data) => {
+    dispatch({ type: "SEND" });
+  };
+
   return (
     <div>
       <div className={styles["header-wrapper"]}>
@@ -61,7 +66,14 @@ const DetailsPage = () => {
       </div>
       <div className="row">
         <Item>
-          <DetailsAdd />
+          <DetailsAdd
+            onAddData={addDataHandler}
+            passData={{
+              token: authCtx.token,
+              userId: authCtx.userId,
+              category: existingCategory.id
+            }}
+          />
         </Item>
         {billsData}
       </div>

@@ -53,6 +53,7 @@ function useHttp(requestFunction, startWithPending = false) {
 
   return {
     sendRequest,
+    dispatch,
     ...httpState
   };
 }

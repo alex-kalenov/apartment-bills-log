@@ -44,3 +44,24 @@ export async function getData(passDetails) {
 
   return transformedData;
 }
+
+export async function sendData(passDetails) {
+  const response = await fetch(
+    `${APP_PATH}${passDetails.userId}/${passDetails.category}.json?auth=${passDetails.token}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: new Date().getTime() / 1000,
+        paid: 0,
+        value: 0
+      })
+    }
+  );
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Произошла ошибка.");
+  }
+  return null;
+}
