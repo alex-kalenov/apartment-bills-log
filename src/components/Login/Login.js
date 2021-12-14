@@ -23,9 +23,10 @@ const Login = () => {
         new Date().getTime() + +data.expiresIn * 1000
       );
       authCtx.login(data.idToken, data.localId, expirationTime.toISOString());
-      history.push("/details");
+      // history.push("/details");
     }
     if (status === "completed" && error) {
+      alert(error);
     }
   }, [status, authCtx, history, data, error]);
 

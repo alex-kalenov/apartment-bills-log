@@ -18,7 +18,7 @@ const Hamburger = (props) => {
 
   const logoutHandler = () => {
     authCtx.logout();
-    history.push("/");
+    // history.push("/");
   };
 
   const hamburgerClass = `${styles.menuToggle} ${

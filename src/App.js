@@ -41,10 +41,5 @@ export default function App() {
     );
   }
 
-  return (
-    <Fragment>
-      {switchContent}
-      <Toast message={"Всё отлично!"} type="succeed" />
-    </Fragment>
-  );
+  return <Fragment>{switchContent}</Fragment>;
 }
