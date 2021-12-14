@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import useHttp from "../../hooks/use-http";
-import { API_KEY, API_PATH } from "../../helpers/data";
 import { loginRequest } from "../../helpers/functions";
 
 import Card from "../UI/Card";
@@ -19,9 +18,11 @@ const Login = () => {
   const passwordRef = useRef();
 
   useEffect(() => {
-    console.log("got it");
     if (status === "completed" && !error) {
-      authCtx.login(data.idToken, data.localId, data.expiresIn);
+      const expirationTime = new Date(
+        new Date().getTime() + +data.expiresIn * 1000
+      );
+      authCtx.login(data.idToken, data.localId, expirationTime.toISOString());
       history.push("/details");
     }
     if (status === "completed" && error) {

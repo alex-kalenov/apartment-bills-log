@@ -12,17 +12,10 @@ import Toast from "./components/UI/Toast";
 
 export default function App() {
   const authCtx = useContext(AuthContext);
-
   let switchContent;
   if (authCtx.isLoggedIn) {
     switchContent = (
       <Switch>
-        <Route path="/" exact>
-          <Redirect to="/login" />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
         <Route>
           <Navigation />
           <Workflow>
@@ -31,7 +24,7 @@ export default function App() {
                 <DetailsPage />
               </Route>
               <Route>
-                <div>Hello</div>
+                <Redirect to="/details" />
               </Route>
             </Switch>
           </Workflow>

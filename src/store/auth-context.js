@@ -26,7 +26,7 @@ const retrieveStoredToken = () => {
 
   if (remainingTime <= 60000) {
     localStorage.removeItem("token");
-    localStorage.removeItem("useriD");
+    localStorage.removeItem("userId");
     localStorage.removeItem("expirationTime");
     return null;
   }
@@ -48,7 +48,7 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = useCallback(() => {
     setToken(null);
     localStorage.removeItem("token");
-    localStorage.removeItem("useriD");
+    localStorage.removeItem("userId");
     localStorage.removeItem("expirationTime");
     if (logoutTimer) clearTimeout(logoutTimer);
   }, []);
@@ -58,13 +58,15 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("token", token);
     localStorage.setItem("userId", userId);
     localStorage.setItem("expirationTime", expirationTime);
-
     const remainingTime = calculateRemainingTime(expirationTime);
     logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
 
   useEffect(() => {
-    if (tokenData) logoutTimer = setTimeout(logoutHandler, tokenData.duration);
+    if (tokenData) {
+      const remainingTime = calculateRemainingTime(tokenData.duration);
+      logoutTimer = setTimeout(logoutHandler, remainingTime);
+    }
   }, [tokenData, logoutHandler]);
 
   const ctxValue = {

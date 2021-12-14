@@ -1,13 +1,15 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import { useHistory } from "react-router-dom";
 import Button from "./Button";
 import styles from "./Hamburger.module.css";
 import HamburgerButton from "./HamburgerButton";
 import Layout from "./Layout";
+import AuthContext from "../../store/auth-context";
 
 const Hamburger = (props) => {
   const [visible, setVisible] = useState(false);
+  const authCtx = useContext(AuthContext);
   const history = useHistory();
 
   const toggleHamburgerHandler = () => {
@@ -15,6 +17,7 @@ const Hamburger = (props) => {
   };
 
   const logoutHandler = () => {
+    authCtx.logout();
     history.push("/");
   };
 
