@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./DetailsPage.module.css";
 import DetailsItem from "../components/Details/DetailsItem";
 import { useLocation } from "react-router-dom";
@@ -12,6 +12,7 @@ import useHttp from "../hooks/use-http";
 import { getData } from "../helpers/functions";
 
 const DetailsPage = () => {
+  const [rerenderTrigger, setRerenderTrigger] = useState(false);
   const authCtx = useContext(AuthContext);
   const { sendRequest, status, data, error, dispatch } = useHttp(getData, true);
 
@@ -21,13 +22,12 @@ const DetailsPage = () => {
   if (!existingCategory) existingCategory = categories[0];
 
   useEffect(() => {
-    if (status === "pending")
-      sendRequest({
-        token: authCtx.token,
-        userId: authCtx.userId,
-        category: existingCategory.id
-      });
-  }, [sendRequest, authCtx, existingCategory, status]);
+    sendRequest({
+      token: authCtx.token,
+      userId: authCtx.userId,
+      category: existingCategory.id
+    });
+  }, [sendRequest, authCtx, existingCategory, rerenderTrigger]);
 
   if (status === "pending") {
     return (
@@ -54,7 +54,9 @@ const DetailsPage = () => {
     });
 
   const addDataHandler = (data) => {
-    dispatch({ type: "SEND" });
+    setRerenderTrigger((state) => {
+      return !state;
+    });
   };
 
   return (
