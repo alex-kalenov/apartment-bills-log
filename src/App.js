@@ -1,18 +1,21 @@
 import "./index.css";
-import { Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Fragment, useContext } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import AuthContext from "./store/auth-context";
 
 import LoginPage from "./pages/LoginPage";
 import DetailsPage from "./pages/DetailsPage";
 
 import Navigation from "./components/Navigation/Navigation";
 import Workflow from "./components/UI/Workflow";
-import { Redirect } from "react-router-dom";
 import Toast from "./components/UI/Toast";
 
 export default function App() {
-  return (
-    <Fragment>
+  const authCtx = useContext(AuthContext);
+
+  let switchContent;
+  if (authCtx.isLoggedIn) {
+    switchContent = (
       <Switch>
         <Route path="/" exact>
           <Redirect to="/login" />
@@ -34,6 +37,20 @@ export default function App() {
           </Workflow>
         </Route>
       </Switch>
+    );
+  } else {
+    switchContent = (
+      <Switch>
+        <Route>
+          <LoginPage />
+        </Route>
+      </Switch>
+    );
+  }
+
+  return (
+    <Fragment>
+      {switchContent}
       <Toast message={"Всё отлично!"} type="succeed" />
     </Fragment>
   );

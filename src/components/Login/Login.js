@@ -19,11 +19,14 @@ const Login = () => {
   const passwordRef = useRef();
 
   useEffect(() => {
-    if (status === "completed") {
+    console.log("got it");
+    if (status === "completed" && !error) {
       authCtx.login(data.idToken, data.localId, data.expiresIn);
       history.push("/details");
     }
-  }, [status, authCtx, history, data]);
+    if (status === "completed" && error) {
+    }
+  }, [status, authCtx, history, data, error]);
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -38,10 +41,6 @@ const Login = () => {
         <LoadingSpinner />
       </div>
     );
-  }
-
-  if (error) {
-    return <p>{error}</p>;
   }
 
   return (
