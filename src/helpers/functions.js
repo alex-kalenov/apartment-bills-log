@@ -20,3 +20,27 @@ export async function loginRequest(credentials) {
   }
   return data;
 }
+
+export async function getData(passDetails) {
+  const response = await fetch(
+    `${APP_PATH}${passDetails.userId}/${passDetails.category}.json?auth=${passDetails.token}`
+  );
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Произошла ошибка.");
+  }
+
+  const transformedData = [];
+
+  for (const key in data) {
+    const dataObj = {
+      id: key,
+      ...data[key]
+    };
+
+    transformedData.push(dataObj);
+  }
+
+  return transformedData;
+}

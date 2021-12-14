@@ -3,7 +3,7 @@ import styles from "./DetailsItem.module.css";
 import { months } from "../../helpers/data";
 
 const DetailsItem = (props) => {
-  const digitalMonth = props.date.getMonth() - 1;
+  const digitalMonth = props.date.getMonth();
   const date = months[digitalMonth] + " " + props.date.getFullYear();
 
   return (
