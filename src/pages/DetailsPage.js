@@ -44,9 +44,9 @@ const DetailsPage = () => {
 
   if (data)
     billsData = data.map((item) => {
-      const date = new Date(item.id * 1000);
+      const date = new Date(item.date * 1000);
       return (
-        <Item key={date.getMonth() + "" + date.getFullYear()}>
+        <Item key={item.id}>
           <DetailsItem date={date} paid={item.paid} value={item.value} />
         </Item>
       );
