@@ -15,8 +15,9 @@ export async function loginRequest(credentials) {
   );
 
   const data = await response.json();
+
   if (!response.ok) {
-    throw new Error(data.message || "Произошла ошибка.");
+    throw new Error(data.error.message || "Произошла ошибка.");
   }
   return data;
 }
@@ -28,7 +29,7 @@ export async function getData(passDetails) {
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Произошла ошибка.");
+    throw new Error(data.error || "Произошла ошибка.");
   }
 
   const transformedData = [];
@@ -61,7 +62,7 @@ export async function sendData(passDetails) {
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Произошла ошибка.");
+    throw new Error(data.error || "Произошла ошибка.");
   }
   return null;
 }
@@ -82,7 +83,7 @@ export async function replaceData(data) {
 
   const responseData = await response.json();
   if (!response.ok) {
-    throw new Error(responseData.message || "Произошла ошибка.");
+    throw new Error(responseData.error || "Произошла ошибка.");
   }
   return null;
 }
