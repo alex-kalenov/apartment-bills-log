@@ -10,11 +10,11 @@ import Layout from "./Layout";
 import AuthContext from "../../store/auth-context";
 
 const Hamburger = (props) => {
-  const [visible, setVisible] = useState(false);
+  const visible = props.visible;
   const authCtx = useContext(AuthContext);
 
   const toggleHamburgerHandler = () => {
-    setVisible((state) => setVisible(!state));
+    props.setVisible((state) => !state);
   };
 
   const logoutHandler = () => {
