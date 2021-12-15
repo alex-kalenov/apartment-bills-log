@@ -1,7 +1,9 @@
 import styles from "./DetailsAdd.module.css";
+
+import { useEffect } from "react";
+
 import useHttp from "../../hooks/use-http";
 import { sendData } from "../../helpers/functions";
-import { useEffect } from "react";
 
 const DetailsAdd = (props) => {
   const { token, userId, category } = props.passData;

@@ -1,5 +1,7 @@
+import styles from "./Login.module.css";
+
 import { useContext, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
+
 import AuthContext from "../../store/auth-context";
 import useHttp from "../../hooks/use-http";
 import { loginRequest } from "../../helpers/functions";
@@ -7,10 +9,8 @@ import { loginRequest } from "../../helpers/functions";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import styles from "./Login.module.css";
 
 const Login = () => {
-  const history = useHistory();
   const authCtx = useContext(AuthContext);
   const { sendRequest, status, data, error } = useHttp(loginRequest, false);
 
@@ -23,12 +23,11 @@ const Login = () => {
         new Date().getTime() + +data.expiresIn * 1000
       );
       authCtx.login(data.idToken, data.localId, expirationTime.toISOString());
-      // history.push("/details");
     }
     if (status === "completed" && error) {
       alert(error);
     }
-  }, [status, authCtx, history, data, error]);
+  }, [status, authCtx, data, error]);
 
   const loginHandler = (event) => {
     event.preventDefault();

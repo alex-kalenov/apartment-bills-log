@@ -1,14 +1,17 @@
 import "./index.css";
+
 import { Fragment, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+
 import AuthContext from "./store/auth-context";
 
+import Navigation from "./components/Navigation/Navigation";
 import LoginPage from "./pages/LoginPage";
 import DetailsPage from "./pages/DetailsPage";
 
-import Navigation from "./components/Navigation/Navigation";
 import Workflow from "./components/UI/Workflow";
-import Toast from "./components/UI/Toast";
+// for refactor
+// import Toast from "./components/UI/Toast";
 
 export default function App() {
   const authCtx = useContext(AuthContext);

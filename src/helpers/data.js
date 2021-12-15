@@ -26,15 +26,5 @@ export const months = [
   "декабрь"
 ];
 
-export const dummyBills = {
-  gas: [
-    { date: new Date(2021, 11, 1), paid: 0, value: 300 },
-    { date: new Date(2021, 10, 1), paid: 100, value: 250 },
-    { date: new Date(2021, 8, 1), paid: 15, value: 200 },
-    { date: new Date(2021, 1, 1), paid: 100, value: 100 }
-  ],
-  water: [{ date: new Date(2021, 6, 1), paid: 180, value: 12 }]
-};
-
 export const API_KEY = "AIzaSyAygkuob-llQEBdiyuUxv29_CthHtt1P9A";
 export const APP_PATH = "https://react-http-d6323-default-rtdb.firebaseio.com/";

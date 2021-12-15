@@ -1,20 +1,24 @@
-import { useContext, useEffect, useState } from "react";
 import styles from "./DetailsPage.module.css";
-import DetailsItem from "../components/Details/DetailsItem";
+
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { categories, dummyBills } from "../helpers/data";
+
+import DetailsItem from "../components/Details/DetailsItem";
 import DetailsAdd from "../components/Details/DetailsAdd";
+
+import { categories } from "../helpers/data";
+import { getData } from "../helpers/functions";
+
 import Item from "../components/UI/Item";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 import AuthContext from "../store/auth-context";
 import useHttp from "../hooks/use-http";
-import { getData } from "../helpers/functions";
 
 const DetailsPage = () => {
   const [rerenderTrigger, setRerenderTrigger] = useState(false);
   const authCtx = useContext(AuthContext);
-  const { sendRequest, status, data, error, dispatch } = useHttp(getData, true);
+  const { sendRequest, status, data, error } = useHttp(getData, true);
 
   const location = useLocation();
   const category = new URLSearchParams(location.search).get("category");
@@ -36,6 +40,7 @@ const DetailsPage = () => {
       </div>
     );
   }
+
   if (error) {
     alert(error);
     return <div></div>;

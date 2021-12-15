@@ -1,11 +1,12 @@
-import Card from "../UI/Card";
 import styles from "./DetailsItem.module.css";
-import { months } from "../../helpers/data";
 
-import useHttp from "../../hooks/use-http";
-import { replaceData } from "../../helpers/functions";
 import { useEffect, useRef, useContext } from "react";
 
+import Card from "../UI/Card";
+
+import { months } from "../../helpers/data";
+import { replaceData } from "../../helpers/functions";
+import useHttp from "../../hooks/use-http";
 import AuthContext from "../../store/auth-context";
 
 const DetailsItem = (props) => {

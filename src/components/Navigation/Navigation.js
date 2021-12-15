@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+
 import Hamburger from "../UI/Hamburger";
+
 import { categories } from "../../helpers/data";
 
 const Navigation = () => {
