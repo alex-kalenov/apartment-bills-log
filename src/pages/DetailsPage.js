@@ -7,7 +7,7 @@ import DetailsItem from "../components/Details/DetailsItem";
 import DetailsAdd from "../components/Details/DetailsAdd";
 
 import { categories } from "../helpers/data";
-import { getData } from "../helpers/functions";
+import { getData, sortData } from "../helpers/functions";
 
 import Item from "../components/UI/Item";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
@@ -52,10 +52,11 @@ const DetailsPage = () => {
     return <div></div>;
   }
 
+  const sortedData = sortData(data, "DESC");
   let billsData;
 
   if (data)
-    billsData = data.map((item) => {
+    billsData = sortedData.map((item) => {
       return (
         <Item key={item.id}>
           <DetailsItem

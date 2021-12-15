@@ -1,5 +1,30 @@
 import { API_KEY, APP_PATH } from "./data";
 
+export const sortData = (data, sortType) => {
+  if (sortType === "ASC") {
+    data.sort((a, b) => {
+      if (a.date > b.date) {
+        return 1;
+      }
+      if (a.date < b.date) {
+        return -1;
+      }
+      return 0;
+    });
+  } else {
+    data.sort((a, b) => {
+      if (a.date < b.date) {
+        return 1;
+      }
+      if (a.date > b.date) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  return data;
+};
+
 export async function loginRequest(credentials) {
   const response = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
