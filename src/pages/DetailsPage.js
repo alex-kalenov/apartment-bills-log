@@ -1,6 +1,6 @@
 import styles from "./DetailsPage.module.css";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 import DetailsItem from "../components/Details/DetailsItem";
@@ -33,6 +33,12 @@ const DetailsPage = () => {
     });
   }, [sendRequest, authCtx, existingCategory, rerenderTrigger]);
 
+  const rerender = useCallback(() => {
+    setRerenderTrigger((state) => {
+      return !state;
+    });
+  }, []);
+
   if (status === "pending") {
     return (
       <div className="centered">
@@ -45,12 +51,6 @@ const DetailsPage = () => {
     alert(error);
     return <div></div>;
   }
-
-  const rerender = () => {
-    setRerenderTrigger((state) => {
-      return !state;
-    });
-  };
 
   let billsData;
 
@@ -82,11 +82,9 @@ const DetailsPage = () => {
         <Item>
           <DetailsAdd
             onAddData={rerender}
-            passData={{
-              token: authCtx.token,
-              userId: authCtx.userId,
-              category: existingCategory.id
-            }}
+            token={authCtx.token}
+            userId={authCtx.userId}
+            category={existingCategory.id}
           />
         </Item>
         {billsData}

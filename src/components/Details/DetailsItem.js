@@ -1,6 +1,6 @@
 import styles from "./DetailsItem.module.css";
 
-import { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 
 import Card from "../UI/Card";
 
@@ -19,8 +19,14 @@ const DetailsItem = (props) => {
   const date = months[digitalMonth] + " " + props.date.getFullYear();
 
   useEffect(() => {
-    if (status === "completed") props.onReplaceData();
-  }, [status, props]);
+    if (status === "completed") {
+      if (!error) {
+        //alert("Изменено");
+        console.log("got it");
+        props.onReplaceData();
+      } else alert(error);
+    }
+  }, [status, props, error]);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -72,4 +78,4 @@ const DetailsItem = (props) => {
   );
 };
 
-export default DetailsItem;
+export default React.memo(DetailsItem);
