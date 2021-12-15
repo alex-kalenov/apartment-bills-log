@@ -52,10 +52,10 @@ const DetailsPage = () => {
     return <div></div>;
   }
 
-  const sortedData = sortData(data, "DESC");
   let billsData;
 
-  if (data)
+  if (data) {
+    const sortedData = sortData(data, "DESC");
     billsData = sortedData.map((item) => {
       return (
         <Item key={item.id}>
@@ -70,6 +70,7 @@ const DetailsPage = () => {
         </Item>
       );
     });
+  }
 
   return (
     <div>
