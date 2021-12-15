@@ -1,6 +1,6 @@
 import styles from "./DetailsItem.module.css";
 
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import Card from "../UI/Card";
 
@@ -11,8 +11,10 @@ import AuthContext from "../../store/auth-context";
 
 const DetailsItem = (props) => {
   const authCtx = useContext(AuthContext);
-  const valueRef = useRef();
-  const paidRef = useRef();
+  //const valueRef = useRef();
+  //const paidRef = useRef();
+  const [value, setValue] = useState(props.value);
+  const [paid, setPaid] = useState(props.paid);
   const { sendRequest, status, data, error } = useHttp(replaceData, true);
 
   const convertedDate = new Date(props.date * 1000);
@@ -24,15 +26,27 @@ const DetailsItem = (props) => {
       if (!error) {
         alert("Изменено");
         props.onReplaceData();
-      } else alert(error);
+      } else {
+        setValue(props.value);
+        setPaid(props.paid);
+        alert(error);
+      }
     }
   }, [status, props, error]);
+
+  const changeValueHandler = (event) => {
+    setValue(event.target.value);
+  };
+
+  const changePaidHandler = (event) => {
+    setPaid(event.target.value);
+  };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const enteredValue = valueRef.current.value;
-    const enteredPaid = paidRef.current.value;
+    const enteredValue = value;
+    const enteredPaid = paid;
 
     const requestData = {
       billId: props.billId,
@@ -57,8 +71,8 @@ const DetailsItem = (props) => {
           <input
             type="number"
             id="value"
-            defaultValue={props.value}
-            ref={valueRef}
+            onChange={changeValueHandler}
+            value={value}
           />
         </div>
         <div>
@@ -66,8 +80,8 @@ const DetailsItem = (props) => {
           <input
             type="number"
             id="paid"
-            defaultValue={props.paid}
-            ref={paidRef}
+            onChange={changePaidHandler}
+            value={paid}
           />
         </div>
         <div>
