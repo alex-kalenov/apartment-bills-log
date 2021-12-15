@@ -5,6 +5,7 @@
 }
 
 h2 {
+  text-align: center;
   display: inline-block;
   margin: 0;
 }
@@ -12,4 +13,16 @@ h2 {
 h2 span {
   color: green;
   font-weight: 700;
+}
+
+@media screen and (max-width: 767px) {
+  h2 {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .header-wrapper {
+    padding: 15px 12px;
+  }
 }

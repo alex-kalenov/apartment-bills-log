@@ -1,5 +1,9 @@
 .hamburger-button {
   display: inline-block;
+  position: fixed;
+  z-index: 5;
+  top: 20px;
+  left: 30px;
   /* position: relative; */
 }
 
@@ -74,4 +78,10 @@
   */
 .hamburger-button input:checked ~ span:nth-last-child(3) {
   transform: rotate(45deg) translate(0, -1px);
+}
+
+@media screen and (max-width: 575px) {
+  .hamburger-button {
+    top: 17px;
+  }
 }

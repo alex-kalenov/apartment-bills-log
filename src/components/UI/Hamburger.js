@@ -31,11 +31,7 @@ const Hamburger = (props) => {
         <Layout isVisible={visible} onClick={toggleHamburgerHandler} />,
         document.getElementById("layouts")
       )}
-      <HamburgerButton
-        onToggle={toggleHamburgerHandler}
-        className={styles["hamburger-button"]}
-        isVisible={visible}
-      />
+      <HamburgerButton onToggle={toggleHamburgerHandler} isVisible={visible} />
       <div className={hamburgerClass}>
         <nav>{props.children}</nav>
         <div className={styles["logout-wrapper"]}>
