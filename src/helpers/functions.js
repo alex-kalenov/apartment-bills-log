@@ -65,3 +65,24 @@ export async function sendData(passDetails) {
   }
   return null;
 }
+
+export async function replaceData(data) {
+  const response = await fetch(
+    `${APP_PATH}${data.passDetails.userId}/${data.passDetails.category}/${data.billId}.json?auth=${data.passDetails.token}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: data.date,
+        paid: data.paid,
+        value: data.value
+      })
+    }
+  );
+
+  const responseData = await response.json();
+  if (!response.ok) {
+    throw new Error(responseData.message || "Произошла ошибка.");
+  }
+  return null;
+}

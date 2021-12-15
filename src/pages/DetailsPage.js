@@ -41,6 +41,12 @@ const DetailsPage = () => {
     return <div></div>;
   }
 
+  const rerender = () => {
+    setRerenderTrigger((state) => {
+      return !state;
+    });
+  };
+
   let billsData;
 
   if (data)
@@ -48,16 +54,17 @@ const DetailsPage = () => {
       const date = new Date(item.date * 1000);
       return (
         <Item key={item.id}>
-          <DetailsItem date={date} paid={item.paid} value={item.value} />
+          <DetailsItem
+            billId={item.id}
+            date={date}
+            paid={item.paid}
+            value={item.value}
+            category={existingCategory.id}
+            onReplaceData={rerender}
+          />
         </Item>
       );
     });
-
-  const addDataHandler = (data) => {
-    setRerenderTrigger((state) => {
-      return !state;
-    });
-  };
 
   return (
     <div>
@@ -69,7 +76,7 @@ const DetailsPage = () => {
       <div className="row">
         <Item>
           <DetailsAdd
-            onAddData={addDataHandler}
+            onAddData={rerender}
             passData={{
               token: authCtx.token,
               userId: authCtx.userId,
