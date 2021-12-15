@@ -56,12 +56,11 @@ const DetailsPage = () => {
 
   if (data)
     billsData = data.map((item) => {
-      const date = new Date(item.date * 1000);
       return (
         <Item key={item.id}>
           <DetailsItem
             billId={item.id}
-            date={date}
+            date={item.date}
             paid={item.paid}
             value={item.value}
             category={existingCategory.id}

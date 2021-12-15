@@ -15,14 +15,14 @@ const DetailsItem = (props) => {
   const paidRef = useRef();
   const { sendRequest, status, data, error } = useHttp(replaceData, true);
 
-  const digitalMonth = props.date.getMonth();
-  const date = months[digitalMonth] + " " + props.date.getFullYear();
+  const convertedDate = new Date(props.date * 1000);
+  const digitalMonth = convertedDate.getMonth();
+  const date = months[digitalMonth] + " " + convertedDate.getFullYear();
 
   useEffect(() => {
     if (status === "completed") {
       if (!error) {
-        //alert("Изменено");
-        console.log("got it");
+        alert("Изменено");
         props.onReplaceData();
       } else alert(error);
     }
@@ -36,7 +36,7 @@ const DetailsItem = (props) => {
 
     const requestData = {
       billId: props.billId,
-      date: props.date.getTime() / 1000,
+      date: convertedDate.getTime() / 1000,
       paid: enteredPaid,
       value: enteredValue,
       passDetails: {
