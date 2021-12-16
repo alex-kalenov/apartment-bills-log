@@ -54,9 +54,10 @@ const DetailsContent = (props) => {
   }
 
   let billsData;
+  let sortedData;
 
   if (data) {
-    const sortedData = sortData(data, "DESC");
+    sortedData = sortData(data, "DESC");
     billsData = sortedData.map((item) => {
       return (
         <Item key={item.id}>
@@ -83,6 +84,7 @@ const DetailsContent = (props) => {
           userId={authCtx.userId}
           category={props.category}
           noValue={noValue}
+          lastDate={sortedData.length !== 0 ? sortedData[0].date : null}
         />
       </Item>
       {billsData}

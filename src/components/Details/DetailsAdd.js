@@ -19,6 +19,15 @@ const DetailsAdd = (props) => {
   }, [status, props, error]);
 
   const add = () => {
+    const lastDate = new Date(props.lastDate * 1000);
+    const isCurrentMonth =
+      lastDate.getMonth() === new Date().getMonth() &&
+      lastDate.getFullYear() === new Date().getFullYear();
+
+    if (lastDate && isCurrentMonth) {
+      alert("Current month has been already added");
+      return;
+    }
     sendRequest({ token, userId, category });
   };
 
