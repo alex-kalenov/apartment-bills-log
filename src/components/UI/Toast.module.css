@@ -8,11 +8,12 @@
   border-radius: 7px;
   transition: transform 0.3s;
   transform: translate(0%, 100%);
+  width: 260px;
+  align-items: center;
 }
 
 .toast p {
   margin: 0;
-  max-width: 300px;
 }
 
 .succeed {
