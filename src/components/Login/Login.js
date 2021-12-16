@@ -3,6 +3,7 @@ import styles from "./Login.module.css";
 import { useContext, useEffect, useRef } from "react";
 
 import AuthContext from "../../store/auth-context";
+import MsgContext from "../../store/message-context";
 import useHttp from "../../hooks/use-http";
 import { loginRequest } from "../../helpers/functions";
 
@@ -12,7 +13,11 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
-  const { sendRequest, status, data, error } = useHttp(loginRequest, false);
+  const msgCtx = useContext(MsgContext);
+  const { sendRequest, cleanupData, status, data, error } = useHttp(
+    loginRequest,
+    false
+  );
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -25,9 +30,10 @@ const Login = () => {
       authCtx.login(data.idToken, data.localId, expirationTime.toISOString());
     }
     if (status === "completed" && error) {
-      alert(error);
+      msgCtx.showMessage(`Ошибка: ${error}`, "error");
+      cleanupData();
     }
-  }, [status, authCtx, data, error]);
+  }, [status, authCtx, msgCtx, data, error, cleanupData]);
 
   const loginHandler = (event) => {
     event.preventDefault();

@@ -1,6 +1,10 @@
 import { useReducer, useCallback } from "react";
 
 function httpReducer(state, action) {
+  if (action.type === "CLEANUP") {
+    return { data: null, error: null, starus: null };
+  }
+
   if (action.type === "SEND") {
     return {
       data: null,
@@ -51,8 +55,13 @@ function useHttp(requestFunction, startWithPending = false) {
     [requestFunction]
   );
 
+  const cleanupData = useCallback(() => {
+    dispatch({ type: "CLEANUP" });
+  }, []);
+
   return {
     sendRequest,
+    cleanupData,
     ...httpState
   };
 }
