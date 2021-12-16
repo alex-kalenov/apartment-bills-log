@@ -5,7 +5,7 @@
   border-radius: 8px;
   display: block;
   background-color: #196ef7;
-  height: 223px;
+  height: 100%;
   width: 100%;
   transition: background-color 0.3s;
 }
@@ -42,4 +42,24 @@
 .add-button__inner::after {
   width: 50%;
   height: 10%;
+}
+
+@media screen and (max-width: 767px) {
+  .add-button {
+    height: 223px;
+  }
+
+  .no-value {
+    height: 174px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .add-button {
+    height: 205px;
+  }
+
+  .no-value {
+    height: 165px;
+  }
 }

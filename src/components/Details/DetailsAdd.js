@@ -22,8 +22,12 @@ const DetailsAdd = (props) => {
     sendRequest({ token, userId, category });
   };
 
+  const buttonClass = `${styles["add-button"]} ${
+    props.noValue ? styles["no-value"] : ""
+  }`;
+
   return (
-    <button className={styles["add-button"]} onClick={add}>
+    <button className={buttonClass} onClick={add}>
       <div className={styles["add-button__inner"]}></div>
     </button>
   );

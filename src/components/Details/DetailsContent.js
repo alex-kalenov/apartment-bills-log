@@ -18,6 +18,14 @@ const DetailsContent = (props) => {
   const authCtx = useContext(AuthContext);
   const { sendRequest, status, data, error } = useHttp(getData, true);
 
+  let noValue = false;
+  if (
+    props.category === "rent" ||
+    props.category === "rubbish" ||
+    props.category === "heating"
+  )
+    noValue = true;
+
   useEffect(() => {
     sendRequest({
       token: authCtx.token,
@@ -59,6 +67,7 @@ const DetailsContent = (props) => {
             value={item.value}
             category={props.category}
             onReplaceData={rerender}
+            noValue={noValue}
           />
         </Item>
       );
@@ -73,6 +82,7 @@ const DetailsContent = (props) => {
           token={authCtx.token}
           userId={authCtx.userId}
           category={props.category}
+          noValue={noValue}
         />
       </Item>
       {billsData}

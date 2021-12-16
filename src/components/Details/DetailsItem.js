@@ -66,15 +66,17 @@ const DetailsItem = (props) => {
     <Card className={styles["bills-item"]}>
       <span>{date}</span>
       <form onSubmit={submitHandler}>
-        <div>
-          <label htmlFor="value">Показатели</label>
-          <input
-            type="number"
-            id="value"
-            onChange={changeValueHandler}
-            value={value}
-          />
-        </div>
+        {!props.noValue && (
+          <div>
+            <label htmlFor="value">Показатели</label>
+            <input
+              type="number"
+              id="value"
+              onChange={changeValueHandler}
+              value={value}
+            />
+          </div>
+        )}
         <div>
           <label htmlFor="paid">Сумма</label>
           <input
