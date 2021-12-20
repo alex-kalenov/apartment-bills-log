@@ -1,5 +1,9 @@
 export const categories = [
-  { id: "gas", linkLabel: "Газ", detailLabel: "газу" },
+  {
+    id: "gas",
+    linkLabel: "Газ",
+    detailLabel: "газу"
+  },
   { id: "water", linkLabel: "Вода", detailLabel: "воде" },
   {
     id: "electricity",

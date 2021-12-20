@@ -53,8 +53,8 @@ const DetailsItem = (props) => {
     const requestData = {
       billId: props.billId,
       date: convertedDate.getTime() / 1000,
-      paid: enteredPaid,
-      value: enteredValue,
+      paid: +enteredPaid,
+      value: +enteredValue,
       passDetails: {
         token: authCtx.token,
         userId: authCtx.userId,
