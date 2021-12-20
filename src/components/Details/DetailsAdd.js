@@ -1,22 +1,30 @@
 import styles from "./DetailsAdd.module.css";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import useHttp from "../../hooks/use-http";
 import { sendData } from "../../helpers/functions";
 
+import MessageContext from "../../store/message-context";
+
 const DetailsAdd = (props) => {
+  const [allowToShowM, setAllowToShowM] = useState(false);
   const { token, userId, category } = props;
-  const { sendRequest, status, data, error } = useHttp(sendData, true);
+  const msgCtx = useContext(MessageContext);
+  const { sendRequest, status, data, error } = useHttp(sendData, false);
 
   useEffect(() => {
     if (status === "completed") {
       if (!error) {
-        alert("Добавлено");
+        setAllowToShowM(false);
+        msgCtx.showMessage(`Добавлено`, "succeed");
         props.onAddData();
-      } else alert(error);
+      } else if (allowToShowM) {
+        setAllowToShowM(false);
+        msgCtx.showMessage(`Ошибка: ${error}`, "error");
+      }
     }
-  }, [status, props, error]);
+  }, [status, props, error, allowToShowM, msgCtx]);
 
   const add = () => {
     const lastDate = new Date(props.lastDate * 1000);
@@ -25,9 +33,10 @@ const DetailsAdd = (props) => {
       lastDate.getFullYear() === new Date().getFullYear();
 
     if (lastDate && isCurrentMonth) {
-      alert("Current month has been already added");
+      msgCtx.showMessage("Данные за этот месяц уже добавлены", "error");
       return;
     }
+    setAllowToShowM(true);
     sendRequest({ token, userId, category });
   };
 

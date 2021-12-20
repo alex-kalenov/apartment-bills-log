@@ -4,7 +4,6 @@ import { Fragment, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import AuthContext from "./store/auth-context";
-import MsgContext from "./store/message-context";
 
 import Navigation from "./components/Navigation/Navigation";
 import LoginPage from "./pages/LoginPage";
@@ -15,7 +14,7 @@ import Toast from "./components/UI/Toast";
 
 export default function App() {
   const authCtx = useContext(AuthContext);
-  const msgCtx = useContext(MsgContext);
+
   let switchContent;
   if (authCtx.isLoggedIn) {
     switchContent = (
@@ -48,11 +47,7 @@ export default function App() {
   return (
     <Fragment>
       {switchContent}
-      <Toast
-        type={msgCtx.type}
-        message={msgCtx.message}
-        show={msgCtx.visible}
-      />
+      <Toast />
     </Fragment>
   );
 }

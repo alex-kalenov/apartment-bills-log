@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 
-import { useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 
 import AuthContext from "../../store/auth-context";
 import MsgContext from "../../store/message-context";
@@ -12,33 +12,35 @@ import Button from "../UI/Button";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const Login = () => {
+  const [allowToShowM, setAllowToShowM] = useState(false);
   const authCtx = useContext(AuthContext);
   const msgCtx = useContext(MsgContext);
-  const { sendRequest, cleanupData, status, data, error } = useHttp(
-    loginRequest,
-    false
-  );
+  const { sendRequest, status, data, error } = useHttp(loginRequest, false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
   useEffect(() => {
-    if (status === "completed" && !error) {
-      const expirationTime = new Date(
-        new Date().getTime() + +data.expiresIn * 1000
-      );
-      authCtx.login(data.idToken, data.localId, expirationTime.toISOString());
+    if (status === "completed") {
+      if (!error) {
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
+        authCtx.login(data.idToken, data.localId, expirationTime.toISOString());
+      } else {
+        if (allowToShowM) {
+          setAllowToShowM(false);
+          msgCtx.showMessage(`Ошибка: ${error}`, "error");
+        }
+      }
     }
-    if (status === "completed" && error) {
-      msgCtx.showMessage(`Ошибка: ${error}`, "error");
-      cleanupData();
-    }
-  }, [status, authCtx, msgCtx, data, error, cleanupData]);
+  }, [status, authCtx, msgCtx, data, error, allowToShowM]);
 
   const loginHandler = (event) => {
     event.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
+    setAllowToShowM(true);
     sendRequest({ email: enteredEmail, password: enteredPassword });
   };
 

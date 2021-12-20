@@ -1,13 +1,19 @@
 import styles from "./Toast.module.css";
 
+import { useContext } from "react";
+
+import MsgContext from "../../store/message-context";
+
 const Toast = (props) => {
+  const msgCtx = useContext(MsgContext);
+
   const toastClass = `${styles.toast} ${
-    props.type === "succeed" ? styles.succeed : styles.error
-  } ${props.show ? styles.show : ""}`;
+    msgCtx.type === "succeed" ? styles.succeed : styles.error
+  } ${msgCtx.visible ? styles.show : ""}`;
 
   return (
     <div className={toastClass}>
-      <p>{props.message}</p>
+      <p>{msgCtx.message}</p>
     </div>
   );
 };

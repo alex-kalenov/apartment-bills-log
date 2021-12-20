@@ -1,6 +1,6 @@
 import styles from "./DetailsItem.module.css";
 
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Card from "../UI/Card";
 
@@ -8,14 +8,15 @@ import { months } from "../../helpers/data";
 import { replaceData } from "../../helpers/functions";
 import useHttp from "../../hooks/use-http";
 import AuthContext from "../../store/auth-context";
+import MessageContext from "../../store/message-context";
 
 const DetailsItem = (props) => {
   const authCtx = useContext(AuthContext);
-  //const valueRef = useRef();
-  //const paidRef = useRef();
+  const msgCtx = useContext(MessageContext);
+  const [allowToShowM, setAllowToShowM] = useState(false);
   const [value, setValue] = useState(props.value);
   const [paid, setPaid] = useState(props.paid);
-  const { sendRequest, status, data, error } = useHttp(replaceData, true);
+  const { sendRequest, status, data, error } = useHttp(replaceData, false);
 
   const convertedDate = new Date(props.date * 1000);
   const digitalMonth = convertedDate.getMonth();
@@ -24,15 +25,16 @@ const DetailsItem = (props) => {
   useEffect(() => {
     if (status === "completed") {
       if (!error) {
-        alert("Изменено");
+        msgCtx.showMessage("Изменено", "succeed");
         props.onReplaceData();
-      } else {
+      } else if (allowToShowM) {
         setValue(props.value);
         setPaid(props.paid);
-        alert(error);
+        setAllowToShowM(false);
+        msgCtx.showMessage(`Ошибка: ${error}`, "error");
       }
     }
-  }, [status, props, error]);
+  }, [status, props, error, msgCtx, allowToShowM]);
 
   const changeValueHandler = (event) => {
     setValue(event.target.value);
@@ -59,6 +61,19 @@ const DetailsItem = (props) => {
         category: props.category
       }
     };
+    if (paid === "" || value === "") {
+      msgCtx.showMessage("Поля не должны быть пустыми", "error");
+      setValue(props.value);
+      setPaid(props.paid);
+      return;
+    }
+    if (paid < 0 || value < 0) {
+      msgCtx.showMessage("Значения не могут быть отрицательными", "error");
+      setValue(props.value);
+      setPaid(props.paid);
+      return;
+    }
+    setAllowToShowM(true);
     sendRequest(requestData);
   };
 

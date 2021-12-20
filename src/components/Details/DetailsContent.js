@@ -49,8 +49,13 @@ const DetailsContent = (props) => {
   }
 
   if (error) {
-    alert(error);
-    return <div></div>;
+    return (
+      <div className="error-message">
+        Произошла ошибка: <span className="error-highlight">{error}</span>{" "}
+        Попробуйте перезагрузить страницу, нажав клавишу <strong>F5</strong> или
+        на значок <i class="fa-solid fa-rotate-right"></i> в браузере.
+      </div>
+    );
   }
 
   let billsData;

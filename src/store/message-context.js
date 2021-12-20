@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-// const initialData = { visible: false, message: "" };
-
 const MessageContext = React.createContext({
   type: "succeed",
   visible: false,
@@ -18,7 +16,7 @@ export const MessageContextProvider = (props) => {
     if (visible) {
       setTimeout(() => {
         setVisible(false);
-      }, 3000);
+      }, 2000);
     }
   }, [visible]);
 
@@ -30,7 +28,6 @@ export const MessageContextProvider = (props) => {
 
   const hideMessage = useCallback(() => {
     setVisible(false);
-    setMessage("");
   }, []);
 
   const msgValue = {

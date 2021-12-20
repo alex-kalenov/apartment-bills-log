@@ -12,10 +12,6 @@
   align-items: center;
 }
 
-.toast p {
-  margin: 0;
-}
-
 .succeed {
   background-color: green;
 }
